@@ -1,0 +1,101 @@
+const authConfig = require("../config/auth");
+const {
+    User
+} = require("../models/index");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const {
+    Op
+} = require("sequelize");
+const UsersController = {};
+
+//CONTROLLER USERS
+
+//FIRST VIEW LOGIN
+
+//register users
+//http://localhost:5000/users/register
+UsersController.register = async(req,res) =>{
+    const {
+        name,
+        email,
+        password
+    } = req.body;
+    password=bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
+    if (/^([a-zA-Z0-9@*#.,]{8,15})$/.test(req.body.password) !== true) {
+        return res.send(
+            "La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres."
+        );
+    };
+    User.findOne({
+        where: {
+            [Op.or]: [{
+                    email: {
+                        [Op.like]: email
+                    }
+                }
+            ]
+
+        }
+    }).then(repeatedData => {
+        if (repeatedData == 0) {
+            User.create({
+                name: name,
+                email: email,
+                password: password
+            }).then(User => {
+                res.send(`Bienvenido, ${User.name}`);
+            }).catch((error) => {
+                res.send(`Ha ocurrido el siguiente error ${error}`);
+            });
+        } else {
+            res.send("El usuario con este e-mail ya existe en nuestra base de datos");
+        }
+    }).catch(error => {
+        res.send(`Ha ocurrido el siguiente error: ${error}`)
+    });
+
+}
+
+//log in
+//http://localhost:5000/users/login
+UsersController.login = async(req,res) =>{
+    const {
+        email,
+        password
+    } = req.body;
+    User.findOne({
+        where: {
+            email: email
+        }
+    }).then(User => {
+        if (User) {
+            if (bcrypt.compareSync(password, user.password)) {
+                const token = jwt.sign({
+                    user: User
+                }, authConfig.secret, {
+                    expiresIn: authConfig.expiresIn
+                });
+                res.send({
+                    token: token,
+                    user: User
+                });
+            } else {
+                res.status(401).send("Contraseña incorrecta");
+            }
+        } else {
+            res.send("El usuario no existe");
+        }
+    }).catch(error => {
+        res.send(`Ha ocurrido el siguiente error: ${error}`)
+    });
+}
+
+
+
+
+//USERS PROFILE VIEW
+
+
+
+//ADMIN PROFILE VIEW
