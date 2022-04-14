@@ -38,7 +38,7 @@ router.get('/profile', auth, UsersController.profile);
 router.delete('/delete', auth, UsersController.delete);
 //http://localhost:5000/users/delete
 
-
+ 
 //ADMIN PROFILE VIEW
 
 //read users admin
