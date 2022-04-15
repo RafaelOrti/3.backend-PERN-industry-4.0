@@ -11,25 +11,28 @@ const ClientAdminUsersController = {};
 
 
 
-//ADMIN PROFILE VIEW
+//clientAdmin PROFILE VIEW
 
 
-//read users admin
+//read users clientAdmin
 //http://localhost:5000/users
-ClientAdminUsersController.adminReadUsers = async (req, res) => {
+ClientAdminUsersController.clientAdminReadUsers = async (req, res) => {
 
     try {
         const token = req.body.emailToken;
         const payload = jwt.verify(token, authConfig.secret);
         let = autorizationLevel;
-        Usuario.findOne({ where: { email: payload.email } })
+        User.findOne({ where: { email: payload.email } })
             .then(data => {
                 authorizationLevel = data.authorizationLevel;
-                if (authorizationLevel === 5) {
-                    User.findAll()
-                        .then(data => {
-                            res.send(data)
-                        })
+                if (authorizationLevel === 3) {
+                    //controller function
+                    User.findAll({
+                        where : { authorizationLevel : 3 || 2 || 1 },
+                    })
+                    .then(data => {
+                        res.send(data)
+                    })
                 } else {
                     res.send("No deberías de estar aquí")
                     //nodemailer
@@ -42,9 +45,9 @@ ClientAdminUsersController.adminReadUsers = async (req, res) => {
 
 
 
-//create new user admin
+//create new user clientAdmin
 //http://localhost:5000/users
-ClientAdminUsersController.adminCreateUser = async (req, res) => {
+ClientAdminUsersController.clientAdminCreateUser = async (req, res) => {
     //read data from request
     const {
         name,
@@ -53,20 +56,25 @@ ClientAdminUsersController.adminCreateUser = async (req, res) => {
         authorizationLevel
     } = req.body;
     password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
+    if (authorizationLevel !== 3 || 2 || 1) {
+        return res.send(
+            "Sólo puedes crear Users de nivel 1 al 3"
+        );
+    };
     if (/^([a-zA-Z0-9@*#.,]{8,15})$/.test(req.body.password) !== true) {
         return res.send(
             "La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres y utilizar simbolor alphanumericos y de puntuación."
         );
     };
-    //Admin authorization verification
+    //clientAdmin authorization verification
     try {
         const token = req.body.emailToken;
         const payload = jwt.verify(token, authConfig.secret);
         let = autorizationLevel;
-        Usuario.findOne({ where: { email: payload.email } })          
+        User.findOne({ where: { email: payload.email } })          
         .then(data => {
             authorizationLevel = data.authorizationLevel;
-            if (authorizationLevel === 5) {
+            if (authorizationLevel === 3) {
                 //controller function
                 User.findOne({ where : { email : email }})
                 .then(repeatedData => {
@@ -99,9 +107,9 @@ ClientAdminUsersController.adminCreateUser = async (req, res) => {
 }
 
 
-//update profile by email admin
+//update profile by email clientAdmin
 //http://localhost:5000/users/email/:email
-ClientAdminUsersController.adminUpdateUser = async (req, res) => {
+ClientAdminUsersController.clientAdminUpdateUser = async (req, res) => {
     //read data from request
     const {
         name,
@@ -110,20 +118,25 @@ ClientAdminUsersController.adminUpdateUser = async (req, res) => {
         authorizationLevel
     } = req.body;
     password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
+    if (authorizationLevel !== 3 || 2 || 1) {
+        return res.send(
+            "Sólo puedes editar Users de nivel 1 al 3"
+        );
+    };
     if (/^([a-zA-Z0-9@*#.,]{8,15})$/.test(req.body.password) !== true) {
         return res.send(
             "La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres y utilizar simbolor alphanumericos y de puntuación."
         );
     };
-    //Admin authorization verification
+    //clientAdmin authorization verification
     try {
         const token = req.body.emailToken;
         const payload = jwt.verify(token, authConfig.secret);
         let = autorizationLevel;
-        Usuario.findOne({ where: { email: payload.email } })
+        User.findOne({ where: { email: payload.email } })
             .then(data => {
                 authorizationLevel = data.authorizationLevel;
-                if (authorizationLevel === 5) {
+                if (authorizationLevel === 3) {
                     //controller function
                     User.update({
                         name: name,
@@ -149,33 +162,38 @@ ClientAdminUsersController.adminUpdateUser = async (req, res) => {
 
 
 
-
-
-//delete user by email admin
+//delete user by email clientAdmin
 //http://localhost:5000/users/:email
-ClientAdminUsersController.adminDeleteUser = async (req, res) => {
+ClientAdminUsersController.clientAdminDeleteUser = async (req, res) => {
     //read data from request
     const {
         email
     } = req.body;
-    //Admin authorization verification
     try {
         const token = req.body.emailToken;
         const payload = jwt.verify(token, authConfig.secret);
         let = autorizationLevel;
-        Usuario.findOne({ where: { email: payload.email } })
+        User.findOne({ where: { email: payload.email } })
             .then(data => {
                 authorizationLevel = data.authorizationLevel;
-                if (authorizationLevel === 5) {
+                if (authorizationLevel === 3) {
                     //controller function
-                    User.destroy({ where: { email: email } })
-                        .then(deleted => {
-                            res.send(deleted)
-                        })
-                        .catch((error) => {
-                            res.send(`Ha ocurrido el siguiente error ${error}`);
-                        });
-                } else {
+                    User.findOne({ where: { email: email } })
+                    .then(data => {
+                        if(data.authorizationLevel === 1 || 2 || 3)
+                        {
+                        User.destroy({ where: { email: email } })
+                            .then(deleted => {
+                                res.send(deleted)
+                            })
+                            .catch((error) => {
+                                res.send(`Ha ocurrido el siguiente error ${error}`);
+                            });
+                        } else {
+                            res.send("Sólo puedes eliminar un User de nivel 1 al 3")
+                        }
+                    })
+                }else {
                     res.send("No deberías de estar aquí")
                     //nodemailer
                 }

@@ -22,7 +22,7 @@ AdminUsersController.adminReadUsers = async (req, res) => {
         const token = req.body.emailToken;
         const payload = jwt.verify(token, authConfig.secret);
         let = autorizationLevel;
-        Usuario.findOne({ where: { email: payload.email } })
+        User.findOne({ where: { email: payload.email } })
             .then(data => {
                 authorizationLevel = data.authorizationLevel;
                 if (authorizationLevel === 5) {
@@ -63,7 +63,7 @@ AdminUsersController.adminCreateUser = async (req, res) => {
         const token = req.body.emailToken;
         const payload = jwt.verify(token, authConfig.secret);
         let = autorizationLevel;
-        Usuario.findOne({ where: { email: payload.email } })          
+        User.findOne({ where: { email: payload.email } })          
         .then(data => {
             authorizationLevel = data.authorizationLevel;
             if (authorizationLevel === 5) {
@@ -120,7 +120,7 @@ AdminUsersController.adminUpdateUser = async (req, res) => {
         const token = req.body.emailToken;
         const payload = jwt.verify(token, authConfig.secret);
         let = autorizationLevel;
-        Usuario.findOne({ where: { email: payload.email } })
+        User.findOne({ where: { email: payload.email } })
             .then(data => {
                 authorizationLevel = data.authorizationLevel;
                 if (authorizationLevel === 5) {
@@ -163,7 +163,7 @@ AdminUsersController.adminDeleteUser = async (req, res) => {
         const token = req.body.emailToken;
         const payload = jwt.verify(token, authConfig.secret);
         let = autorizationLevel;
-        Usuario.findOne({ where: { email: payload.email } })
+        User.findOne({ where: { email: payload.email } })
             .then(data => {
                 authorizationLevel = data.authorizationLevel;
                 if (authorizationLevel === 5) {
