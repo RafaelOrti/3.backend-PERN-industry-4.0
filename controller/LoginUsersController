@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const {
     Op
 } = require("sequelize");
-const UsersController = {};
+const LoginUsersController = {};
 
 //CONTROLLER USERS
 
@@ -15,7 +15,7 @@ const UsersController = {};
 
 //register users
 //http://localhost:5000/users/register
-UsersController.register = async (req, res) => {
+LoginUsersController.register = async (req, res) => {
     const {
         name,
         email,
@@ -50,7 +50,7 @@ UsersController.register = async (req, res) => {
 
 //log in
 //http://localhost:5000/users/login
-UsersController.login = async (req, res) => {
+LoginUsersController.login = async (req, res) => {
     const {
         email,
         password

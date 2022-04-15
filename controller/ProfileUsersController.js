@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const {
     Op
 } = require("sequelize");
-const UsersController = {};
+const ProfileUsersController = {};
 
 
 
@@ -17,7 +17,7 @@ const UsersController = {};
 
 //read profile
 //http://localhost:5000/users/profile
-UsersController.readProfile = async (req, res) => {
+ProfileUsersController.readProfile = async (req, res) => {
 
 
     try {
@@ -36,7 +36,7 @@ UsersController.readProfile = async (req, res) => {
 
 //update profile
 //http://localhost:5000/users/update
-UsersController.updateProfile = async (req, res) => {
+ProfileUsersController.updateProfile = async (req, res) => {
     const data = {
         name,
         email,
@@ -59,7 +59,7 @@ UsersController.updateProfile = async (req, res) => {
 
 //delete user by email
 //http://localhost:5000/users/delete
-UsersController.deleteUser = async (req, res) => {
+ProfileUsersController.deleteUser = async (req, res) => {
 
     try {
         const token = req.body.emailToken;

@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const {
     Op
 } = require("sequelize");
-const UsersController = {};
+const AdminUsersController = {};
 
 
   
@@ -16,7 +16,7 @@ const UsersController = {};
 
 //read users admin
 //http://localhost:5000/users
-UsersController.adminReadUsers = async (req, res) => {
+AdminUsersController.adminReadUsers = async (req, res) => {
 
     try {
         const token = req.body.emailToken;
@@ -44,7 +44,7 @@ UsersController.adminReadUsers = async (req, res) => {
 
 //create new user admin
 //http://localhost:5000/users
-UsersController.adminCreateUser = async (req, res) => {
+AdminUsersController.adminCreateUser = async (req, res) => {
     //read data from request
     const {
         name,
@@ -101,7 +101,7 @@ UsersController.adminCreateUser = async (req, res) => {
 
 //update profile by email admin
 //http://localhost:5000/users/email/:email
-UsersController.adminUpdateUser = async (req, res) => {
+AdminUsersController.adminUpdateUser = async (req, res) => {
     //read data from request
     const {
         name,
@@ -153,7 +153,7 @@ UsersController.adminUpdateUser = async (req, res) => {
 
 //delete user by email admin
 //http://localhost:5000/users/:email
-UsersController.adminDeleteUser = async (req, res) => {
+AdminUsersController.adminDeleteUser = async (req, res) => {
     //read data from request
     const {
         email
