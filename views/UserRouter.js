@@ -26,16 +26,16 @@ router.post('/login', UsersController.login);
 
 //USERS PROFILE VIEW
 
-//update profile
-router.put('/update', auth, UsersController.update);
-//http://localhost:5000/users/update
-
 //read profile
-router.get('/profile', auth, UsersController.profile);
+router.get('/profile', auth, UsersController.readProfile);
 //http://localhost:5000/users/profile
 
+//update profile
+router.put('/update', auth, UsersController.updateProfile);
+//http://localhost:5000/users/update
+
 //delete user by email
-router.delete('/delete', auth, UsersController.delete);
+router.delete('/delete', auth, UsersController.deleteProfile);
 //http://localhost:5000/users/delete
 
  
