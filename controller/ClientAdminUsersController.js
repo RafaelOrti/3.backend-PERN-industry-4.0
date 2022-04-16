@@ -1,12 +1,7 @@
 const authConfig = require("../config/auth");
-const {
-    User
-} = require("../models/index");
+const { User } = require("../models/index");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const {
-    Op
-} = require("sequelize");
 const ClientAdminUsersController = {};
 
 
