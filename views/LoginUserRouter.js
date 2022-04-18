@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const UsersController = require('../controllers/LoginUsersController');
+const LoginUsersController = require('../controllers/LoginUsersController');
+
 
 
 //CRUD USERS
@@ -19,8 +20,8 @@ router.post('/login', LoginUsersController.login);
 // //email confirmation
 // router.post('/confirm', UsersController.confirm);
 // //http://localhost:5000/users/confirm
-
+   
  
-
+module.exports = router;
 
 

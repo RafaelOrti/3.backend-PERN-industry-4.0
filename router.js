@@ -8,6 +8,9 @@ const ProfileUserRouter = require('./views/ProfileUserRouter');
 // const OrdersRouter = require('./views/OrdersRouter');
 
 router.use('/users', AdminUserRouter,ClientAdminUserRouter,LoginUserRouter,ProfileUserRouter);
+// router.use('/users1', ClientAdminUserRouter);
+// router.use('/users2', LoginUserRouter);
+// router.use('/users3', ProfileUserRouter);
 
 // router.use('/peliculas', PeliculasRouter);
 // router.use('/orders', OrdersRouter);

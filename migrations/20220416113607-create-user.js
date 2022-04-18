@@ -23,6 +23,7 @@ module.exports = {
       },
       authorizationLevel: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         defaultValue: 1
       },
       createdAt: {
