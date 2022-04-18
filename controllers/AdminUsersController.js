@@ -164,7 +164,7 @@ AdminUsersController.adminUpdateUser = (req, res) => {
 }
 
 
-
+ 
 //delete user by email Admin
 //http://localhost:5000/users/:email
 AdminUsersController.adminDeleteUser = (req, res) => {
