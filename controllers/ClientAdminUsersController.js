@@ -14,7 +14,7 @@ const ClientAdminUsersController = {};
 //http://localhost:5000/users
 ClientAdminUsersController.clientAdminReadUsers = (req, res) => {
 
-
+ 
     try {
         const token = req.headers.authorization.split(" ")[1];
         const payload = jwt.verify(token, authConfig.secret);
