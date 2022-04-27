@@ -75,7 +75,7 @@ ProfileUsersController.updateProfile =  (req, res) => {
 
 //delete user by email
 //http://localhost:5000/users/delete
-ProfileUsersController.deleteProfile =  (req, res) => {
+ProfileUsersController.deleteProfile = (req, res) => {
 
     try {
         const token = req.headers.authorization.split(" ")[1];

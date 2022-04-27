@@ -18,12 +18,35 @@ router.post('/readInstallation',  InstallationController.readInstallation);
 //http://localhost:3000/installation/userInstallation
 
 //read users userInstallation
-router.post('/writeCoil',  InstallationController.writeCoil);
+router.post('/writeCoils',  InstallationController.writeCoils);
 //http://localhost:3000/installation/userInstallation
 
 //read users userInstallation
-router.post('/readCoil',  InstallationController.readCoil);
+router.post('/readCoils',  InstallationController.readCoils);
 //http://localhost:3000/installation/userInstallation
+
+
+router.post('/readDiscreteInputs',  InstallationController.readDiscreteInputs);
+//http://localhost:3000/installation/userInstallation
+
+//read users userInstallation
+router.post('/writeHoldingRegisters',  InstallationController.writeHoldingRegisters);
+//http://localhost:3000/installation/userInstallation
+
+router.post('/readHoldingRegisters',  InstallationController.readHoldingRegisters);
+//http://localhost:3000/installation/userInstallation
+
+//read users userInstallation
+router.post('/readInputRegisters',  InstallationController.readInputRegisters);
+//http://localhost:3000/installation/userInstallation
+
+
+
+
+
+
+
+
 
 
 
