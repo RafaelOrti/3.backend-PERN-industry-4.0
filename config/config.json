@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "1234",
-    "database": "database_industria_4.0",
-    "host": "127.0.0.1",
+    "username": "bcf4aa9d899db7",
+    "password": "3efb1278",
+    "database": "heroku_7a379fac060c383",
+    "host": "us-cdbr-east-05.cleardb.net",
     "dialect": "mysql" 
   },
   "test": {
