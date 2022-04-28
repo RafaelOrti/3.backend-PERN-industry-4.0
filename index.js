@@ -17,7 +17,7 @@ let corsOptions = {//CONFIGURO OPCIONES DE CORS PARA PERMITIR QUE ACCIONES DE AP
 app.use(express.json()); //PUEDO OBTENER JSON DEL BODY
 app.use(cors(corsOptions));  //USO CORS
 //Middleware
-
+ 
 app.use(router);
 
 db.then(()=>{
