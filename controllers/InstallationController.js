@@ -58,9 +58,9 @@ const frecuencyRealTime = 2000; //first call timing
 let realTime = async () => {
   await axios.post(`http://localhost:3000/installation/readInstallation`);
 }
-setInterval(
-  realTime,
-  frecuencyRealTime);
+// setInterval(
+//   realTime,
+//   frecuencyRealTime);
 //userInstallation
 //http://localhost:3000/installation/userInstallation
 InstallationController.readInstallation = async (req, res) => {
@@ -105,8 +105,8 @@ InstallationController.readInstallation = async (req, res) => {
   }
   try {
 
-//2 3 4 5 6 7 8 9 10 11
-//ponerle el id 
+    //2 3 4 5 6 7 8 9 10 11
+    //ponerle el id 
 
     // let numberRowsSQL = `
     // SELECT COUNT(*)
@@ -149,16 +149,16 @@ InstallationController.readInstallation = async (req, res) => {
     console.log(a);
     if (a > 3) {
 
-      
-      insideArray[0]  = readData.data.data[0] / 100
-      insideArray[1]  = readData.data.data[1]/Math.random()
-      insideArray[2]  = readData.data.data[2]
-      insideArray[3]  = readData.data.data[3] / 10000
+
+      insideArray[0] = readData.data.data[0] / 100
+      insideArray[1] = readData.data.data[1] / Math.random()
+      insideArray[2] = readData.data.data[2]
+      insideArray[3] = readData.data.data[3] / 10000
 
       realTimeArray.shift();
       // realTimeArray.push(insideArray);
       // realTimeArray[a-1] = insideArray
-    
+
 
       // for (let i = 0; i < 3; i++) {
       //   realTimeArray[i] = realTimeArray[i+1] 
@@ -170,17 +170,17 @@ InstallationController.readInstallation = async (req, res) => {
     } else {
       console.log("holaaaaaaa")
 
-      insideArray[0]  = readData.data.data[0] / 100
-      insideArray[1]  = readData.data.data[1]/Math.random()
-      insideArray[2]  = readData.data.data[2]
-      insideArray[3]  = readData.data.data[3] / 10000
+      insideArray[0] = readData.data.data[0] / 100
+      insideArray[1] = readData.data.data[1] / Math.random()
+      insideArray[2] = readData.data.data[2]
+      insideArray[3] = readData.data.data[3] / 10000
 
       realTimeArray[0].push(insideArray)
       // realTimeArray[a+1][2] = readData.data.data[1],
       // realTimeArray[a+1][3] = readData.data.data[2],
       // realTimeArray[a+1][4] = readData.data.data[3] / 10000
     }
-    console.log("99999",realTimeArray)
+    console.log("99999", realTimeArray)
   } catch (error) {
     console.log(error);
   }
@@ -209,7 +209,7 @@ InstallationController.writeCoils = async (req, res) => {
   console.log(auth.access_token);
 
   let body = req.body
-  res.send(body)
+  // res.send(body)
 
   // {
   //   "host": "192.168.1.9",
@@ -228,11 +228,11 @@ InstallationController.writeCoils = async (req, res) => {
 
   try {
 
-    let resultados = await axios.post(`https://la-api-de-test.ddns.net:18452/write_raw_data`, body, {
+    let readData = await axios.post(`https://la-api-de-test.ddns.net:18452/write_raw_data`, body, {
       headers: header
     });
-    console.log(resultados);
-    res.send(resultados.data);
+    console.log(readData);
+    res.send(readData.data);
 
   } catch (error) {
     console.log(error);
@@ -273,15 +273,25 @@ InstallationController.readCoils = async (req, res) => {
 
   try {
 
-    let resultados = await axios.post(`https://la-api-de-test.ddns.net:18452/get_raw_data`, body, {
+    let readData = await axios.post(`https://la-api-de-test.ddns.net:18452/get_raw_data`, body, {
       headers: header
     });
-    console.log(resultados);
-    res.send(resultados.data);
+    console.log(readData);
+    let chunk=[]
+    console.log(readData.data.data);
+    for (let i = 0; i < 2; i ++) {
+      chunk[i] = readData.data.data[i];
+
+      // do whatever
+    }
+    console.log(chunk)
+    res.send(chunk);
+    
 
 
   } catch (error) {
     console.log(error);
+    res.send(error);
   }
 }
 
@@ -320,7 +330,17 @@ InstallationController.readDiscreteInputs = async (req, res) => {
     let readData = await axios.post(`https://la-api-de-test.ddns.net:18452/get_raw_data`, body, {
       headers: header
     });
-    console.log(readData);
+
+    let chunk=[]
+    console.log(readData.data.data);
+    for (let i = 0; i < 9; i ++) {
+      chunk[i] = readData.data.data[i];
+      console.log(readData.data.data[i]);
+      // do whatever
+    }
+    console.log(chunk)
+    res.send(chunk);
+
     // //save in db
     // RealTimeInstallation.create({
     //   temperature: readData.data.data[0] / 100,
@@ -335,6 +355,7 @@ InstallationController.readDiscreteInputs = async (req, res) => {
 
   } catch (error) {
     console.log(error);
+    res.send(error);
   }
 }
 
@@ -345,13 +366,8 @@ InstallationController.readDiscreteInputs = async (req, res) => {
 //----------------------------------------------
 InstallationController.writeHoldingRegisters = async (req, res) => {
 
-  if (tokenInstallation === undefined) {
-    await call().catch(console.log('error'))
-    //nodemailer
-  }
-
   const getOwnerCredentials = oauth.client(axios.create(), {
-    url: 'https://la-api-de-test.ddns.net:18452/write_raw_data',
+    url: 'https://la-api-de-test.ddns.net:18452/users/login',
     username: 'rafa',
     password: '12345678',
   });
@@ -360,9 +376,17 @@ InstallationController.writeHoldingRegisters = async (req, res) => {
   console.log(auth.access_token);
 
   let body = req.body
-  res.send(body)
+  // res.send(body)
 
-  // {
+
+
+  let header = {
+    "Authorization": `Bearer ${auth.access_token}`,
+    'accept': ' application/json',
+    'Content-Type': 'application/json'
+  }
+
+    // {
   //   "host": "192.168.1.9",
   //   "port": 502,
   //   "protocol": "modbusTCP",
@@ -371,19 +395,16 @@ InstallationController.writeHoldingRegisters = async (req, res) => {
   //   "quantity": 1
   // }
 
-  let header = {
-    "Authorization": `Bearer ${auth.access_token}`,
-    'accept': ' application/json',
-    'Content-Type': 'application/json'
-  }
-
   try {
 
-    let resultados = await axios.post(`https://la-api-de-test.ddns.net:18452/write_raw_data`, body, {
+    let readData = await axios.post(`https://la-api-de-test.ddns.net:18452/write_raw_data`, body, {
       headers: header
     });
-    console.log(resultados);
-    res.send(resultados.data);
+    console.log(readData);
+    res.send(readData.data);
+
+
+
 
   } catch (error) {
     console.log(error);
@@ -426,6 +447,7 @@ InstallationController.readHoldingRegisters = async (req, res) => {
       headers: header
     });
     console.log(readData);
+    res.send(readData.data);
     // //save in db
     // RealTimeInstallation.create({
     //   temperature: readData.data.data[0] / 100,
@@ -440,6 +462,7 @@ InstallationController.readHoldingRegisters = async (req, res) => {
 
   } catch (error) {
     console.log(error);
+    res.send(error);
   }
 }
 
@@ -481,6 +504,16 @@ InstallationController.readInputRegisters = async (req, res) => {
       headers: header
     });
     console.log(readData);
+
+    let chunk=[]
+    console.log(readData.data.data);
+    for (let i = 0; i < 7; i ++) {
+      chunk[i] = readData.data.data[i];
+
+      // do whatever
+    }
+    console.log(chunk)
+    res.send(chunk);
     // //save in db
     // RealTimeInstallation.create({
     //   temperature: readData.data.data[0] / 100,
@@ -495,6 +528,7 @@ InstallationController.readInputRegisters = async (req, res) => {
 
   } catch (error) {
     console.log(error);
+    res.send(error);
   }
 }
 
