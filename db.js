@@ -23,4 +23,6 @@ module.exports = sequelize.authenticate()
 .then((db)=>{
     console.log('MYSQL connected'); 
     return db;
+}).catch((err)=>{
+    console.log(err);
 });

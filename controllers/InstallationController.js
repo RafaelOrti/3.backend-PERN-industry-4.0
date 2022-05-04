@@ -45,10 +45,10 @@ InstallationController.userInstallation = async (req, res) => {
 }
 
 
-//----------------------------------------------
-//REAL TIME
-//'http://localhost:3000/installation/readInstallation'
-//----------------------------------------------
+// ----------------------------------------------
+// REAL TIME
+// 'http://localhost:3000/installation/readInstallation'
+// ----------------------------------------------
 
 let realTimeArray = [];
 let insideArray = [];
