@@ -12,7 +12,7 @@ const InstallationController = {};
 
 //----------------------------------------------
 //10 HOURS LOGIN
-//'http://localhost:3000/installation/userInstallation'
+//'http://localhost:5000/installation/userInstallation'
 //----------------------------------------------
 
 //timers
@@ -20,7 +20,7 @@ const frecuencyLogin = 10 * 60 * 60 * 1000; // 10 hour in msec, frecuency call t
 const firstCall = 100; //first call timing
 let tokenInstallation;
 let call = async () => {
-  tokenInstallation = await axios.post(`http://localhost:3000/installation/userInstallation`);
+  tokenInstallation = await axios.post(`http://localhost:5000/installation/userInstallation`);
 }
 setTimeout(
   call, firstCall);
@@ -28,7 +28,7 @@ setInterval(
   call,
   frecuencyLogin);
 //userInstallation
-//http://localhost:3000/installation/userInstallation
+//http://localhost:5000/installation/userInstallation
 
 InstallationController.userInstallation = async (req, res) => {
 
@@ -47,7 +47,7 @@ InstallationController.userInstallation = async (req, res) => {
 
 // ----------------------------------------------
 // REAL TIME
-// 'http://localhost:3000/installation/readInstallation'
+// 'http://localhost:5000/installation/readInstallation'
 // ----------------------------------------------
 
 let realTimeArray = [];
@@ -56,13 +56,13 @@ let insideArray = [];
 
 const frecuencyRealTime = 2000; //first call timing
 let realTime = async () => {
-  await axios.post(`http://localhost:3000/installation/readInstallation`);
+  await axios.post(`http://localhost:5000/installation/readInstallation`);
 }
 // setInterval(
 //   realTime,
 //   frecuencyRealTime);
 //userInstallation
-//http://localhost:3000/installation/userInstallation
+//http://localhost:5000/installation/userInstallation
 InstallationController.readInstallation = async (req, res) => {
 
 
@@ -190,7 +190,7 @@ InstallationController.readInstallation = async (req, res) => {
 
 //----------------------------------------------
 //10 WRITE COIL
-//http://localhost:3000/installation/userInstallation
+//http://localhost:5000/installation/userInstallation
 //----------------------------------------------
 InstallationController.writeCoils = async (req, res) => {
 
@@ -243,7 +243,7 @@ InstallationController.writeCoils = async (req, res) => {
 
 //----------------------------------------------
 //10 READ COIL
-//http://localhost:3000/installation/userInstallation
+//http://localhost:5000/installation/userInstallation
 //----------------------------------------------
 
 InstallationController.readCoils = async (req, res) => {

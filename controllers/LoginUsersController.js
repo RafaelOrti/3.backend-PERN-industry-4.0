@@ -18,9 +18,9 @@ LoginUsersController.register = (req, res) => {
     let password= req.body.password;
 
     if (/^([a-zA-Z0-9@*#.,]{8,15})$/.test(req.body.password) !== true) {
-        return res.send(
-            "La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres y los siguientes carácteres alfanuméricos a-zA-Z0-9@*#.,"
-        );
+        return res.send({
+            msg:"invalid password"
+        });
     }else{
         password= bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
     }; 
@@ -31,17 +31,36 @@ LoginUsersController.register = (req, res) => {
             User.create({
                 name: name,
                 email: email,
-                password: password
-            }).then(User => {
-                res.send(`Bienvenido, ${User.name}`);
-            }).catch((error) => {
-                res.send(`db error ${error}`);
+                password: password,
+                authorizationLevel:1
+
+            }).then(User=> {
+
+                const token = jwt.sign({
+                    user: User
+                }, authConfig.secret, {
+                    expiresIn: authConfig.expires
+                });
+                console.log("token",User);
+                res.send({
+                    msg:"Welcome",
+                    token: token,
+                    user: User.dataValues
+                });
+
+            })
+            .catch((error) => {
+                res.send({
+                    msg:`DB error`});
             });
+            
         } else {
-            res.send(`El User con este e-mail ya existe en nuestra base de datos`);
+            res.send({
+                msg:`this user already exists`});
         }
     }).catch(error => {
-        res.send(`db error: ${error}`)
+        res.send({
+            msg:`DB error`})
     });
 
 }
@@ -49,33 +68,39 @@ LoginUsersController.register = (req, res) => {
 //log in
 //http://localhost:5000/users/login
 LoginUsersController.login = (req, res) => {
-    const {
-        email,
-        password
-    } = req.body;
+    let email = req.body.email;
+    let password = req.body.password;
+
     User.findOne({
             where: {  email: email   }
         })
         .then(User => {
+
             if (User) {
+                console.log("66666",User);
                 if (bcrypt.compareSync(password, User.password)) {
                     const token = jwt.sign({
                         user: User
                     }, authConfig.secret, {
                         expiresIn: authConfig.expires
                     });
+                    console.log("666668",token);
                     res.send({
+                        msg:"Welcome",
                         token: token,
                         user: User
                     });
                 } else {
-                    res.status(401).send("Contraseña incorrecta");
+                        res.send({
+                            msg:`Incorrect password`});
                 }
             } else {
-                res.send("El User no existe");
+                res.send({
+                    msg:"User does not exist"});
             }
         }).catch(error => {
-            res.send(`db error: ${error}`)
+            res.send({
+                msg:`DB error`})
         });
 }
  
