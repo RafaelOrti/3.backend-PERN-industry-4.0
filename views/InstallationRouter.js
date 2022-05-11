@@ -9,13 +9,13 @@ const InstallationController = require('../controllers/InstallationController');
 
 
 
-//read users userInstallation
-router.post('/userInstallation',  InstallationController.userInstallation);
-//http://localhost:5000/installation/userInstallation
+// //read users userInstallation
+// router.post('/userInstallation',  InstallationController.userInstallation);
+// //http://localhost:5000/installation/userInstallation
 
-//read users userInstallation
-router.post('/readInstallation',  InstallationController.readInstallation);
-//http://localhost:5000/installation/userInstallation
+// //read users userInstallation
+// router.post('/readInstallation',  InstallationController.readInstallation);
+// //http://localhost:5000/installation/userInstallation
 
 //read users userInstallation
 router.post('/writeCoils',  InstallationController.writeCoils);

@@ -41,7 +41,7 @@ LoginUsersController.register = (req, res) => {
                 }, authConfig.secret, {
                     expiresIn: authConfig.expires
                 });
-                console.log("token",User);
+                //console.log("token",User);
                 res.send({
                     msg:"Welcome",
                     token: token,
@@ -77,14 +77,14 @@ LoginUsersController.login = (req, res) => {
         .then(User => {
 
             if (User) {
-                console.log("66666",User);
+                //console.log("66666",User);
                 if (bcrypt.compareSync(password, User.password)) {
                     const token = jwt.sign({
                         user: User
                     }, authConfig.secret, {
                         expiresIn: authConfig.expires
                     });
-                    console.log("666668",token);
+                    //console.log("666668",token);
                     res.send({
                         msg:"Welcome",
                         token: token,

@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
     let {user} = jwt.decode(token,authConfig.secret)
 
     try{
-        if(user.authorizationLevel === 3){
+        if(user.authorizationLevel >= 3){
             next();
         }else{
             res.status(403).send({msg:`User is not allowed.`})

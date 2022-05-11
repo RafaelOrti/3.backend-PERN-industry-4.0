@@ -14,13 +14,13 @@ const ClientAdminUsersController = {};
 //http://localhost:5000/users
 ClientAdminUsersController.clientAdminReadUsers = (req, res) => {
 
- 
     try {
         const token = req.headers.authorization.split(" ")[1];
+        console.log(token)
         const payload = jwt.verify(token, authConfig.secret);
+        console.log("4444",payload)
         User.findOne({ where: { email: payload.user.email } })
             .then(found => {
-                    
                 if (found.authorizationLevel === 3) {
                     //controller function
                     User.findAll({
@@ -43,7 +43,8 @@ ClientAdminUsersController.clientAdminReadUsers = (req, res) => {
                 res.send(`Ha ocurrido el siguiente error: ${error}`)
             });
     } catch (error) {
-        res.send(error)
+        res.send({ 
+            msg: `DB error`})
     };
 }
 
@@ -53,6 +54,7 @@ ClientAdminUsersController.clientAdminReadUsers = (req, res) => {
 //http://localhost:5000/users
 ClientAdminUsersController.clientAdminCreateUser = (req, res) => {
     //read data from request
+    console.log("eeeeeeeee",req.body)
     let data = {
         name,
         email,
@@ -61,13 +63,15 @@ ClientAdminUsersController.clientAdminCreateUser = (req, res) => {
     } = req.body;
     
     if (data.authorizationLevel < 1 && data.authorizationLevel > 3) {
-        return res.send(
-            "Sólo puedes crear Users de nivel 1 al 3"
+        return res.send({ 
+            msg: "Only users with 1 to 3 allowed"
+        }
         );
     }
     if (/^([a-zA-Z0-9@*#.,]{8,15})$/.test(data.password) !== true) {
         return res.send(
-            "La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres y utilizar simbolor alphanumericos y de puntuación."
+            { 
+                msg: "invalid password"}
         );
     };
     data.password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
@@ -75,13 +79,15 @@ ClientAdminUsersController.clientAdminCreateUser = (req, res) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
         const payload = jwt.verify(token, authConfig.secret);
+        console.log("repeatedData",payload)
+        console.log("repeatedData",data)
         User.findOne({ where: { email: payload.user.email } })
             .then(found => {
-                if (found.authorizationLevel === 3) {
+                if (found.authorizationLevel >= 3) {
                     //controller function
-                    User.findOne({ where: { email: email } })
+                    User.findOne({ where: { email: data.email } })
                         .then(repeatedData => {
-                            console.log(repeatedData)
+                            
                             if (repeatedData == null) {
                                 User.create({
                                     name: data.name,
@@ -89,26 +95,33 @@ ClientAdminUsersController.clientAdminCreateUser = (req, res) => {
                                     password: data.password,
                                     authorizationLevel: data.authorizationLevel
                                 }).then(User => {
-                                    res.send(`Bienvenido, ${User.name}`);
+                                    res.send({ 
+                                        msg: `Welcome`});
                                 }).catch((error) => {
-                                    res.send(`Ha ocurrido el siguiente error ${error}`);
+                                    res.send({ 
+                                        msg: `DB error`});
                                 });
                             } else {
-                                res.send("El User con este e-mail ya existe en nuestra base de datos");
+                                res.send({ 
+                                    msg: "this user already exists"});
                             }
                         })
                         .catch(error => {
-                            res.send(`Ha ocurrido el siguiente error: ${error}`)
+                            res.send({ 
+                                msg: `DB error`})
                         });
                 } else {
-                    res.send("No deberías de estar aquí")
+                    res.send({ 
+                        msg: "No deberías de estar aquí"})
                     //nodemailer
                 }
             }).catch(error => {
-                res.send(`Ha ocurrido el siguiente error: ${error}`)
+                res.send({ 
+                    msg: `DB error`})
             });
     } catch (error) {
-        res.send(error)
+        res.send({ 
+            msg: `DB error`})
     };
 }
 
@@ -125,8 +138,8 @@ ClientAdminUsersController.clientAdminUpdateUser = (req, res) => {
     } = req.body;
     
     if (data.authorizationLevel < 1 && data.authorizationLevel > 3) {
-        return res.send(
-            "Sólo puedes actualizar Users de nivel 1 al 3"
+        return res.send({
+            msg:"you only can update 1 to 3 level user"}
         );
     }
     if (/^([a-zA-Z0-9@*#.,]{8,15})$/.test(data.password) !== true) {
@@ -142,24 +155,30 @@ ClientAdminUsersController.clientAdminUpdateUser = (req, res) => {
         console.log(payload.user.email)
         User.findOne({ where: { email: payload.user.email } })
             .then(found => {
-                if (found.authorizationLevel === 3) {
+                if (found.authorizationLevel >= 3) {
                     //controller function
                     User.update(data, {  where: { email: email  } })
                         .then(updated => {
-                            res.send(updated)
+                            res.send({ 
+                                msg: `updated`})
+                        
+                        
                         })
                         .catch((error) => {
-                            res.send(`Ha ocurrido el siguiente error ${error}`);
+                            res.send({ 
+                                msg: `DB error`})
+                        
                         });
                 } else {
-                    res.send("No deberías de estar aquí")
+                    res.send({msg:"No deberías de estar aquí"})
                     //nodemailer
                 }
             }).catch(error => {
-                res.send(`No se ha encontrado tu usuario, error : ${error}`)
+                res.send({msg:"this user doesnt exists"})
             });
     } catch (error) {
-        res.send(error)
+        res.send({ 
+            msg: `DB error`})
     };
 }
 
@@ -169,39 +188,50 @@ ClientAdminUsersController.clientAdminUpdateUser = (req, res) => {
 //http://localhost:5000/users/:email
 ClientAdminUsersController.clientAdminDeleteUser = (req, res) => {
     //read data from request
+    console.log("bolsillo",req)
     const email = req.body.email;
     try {
         const token = req.headers.authorization.split(" ")[1];
         const payload = jwt.verify(token, authConfig.secret);
+        console.log("bolsillo",payload.user.email)
         User.findOne({ where: {  email: payload.user.email } })
             .then(found => {
-                if (found.authorizationLevel === 3) {
+                if (found.authorizationLevel >= 3) {
                     //controller function
                     User.findOne({  where: {  email: email } })
                         .then(data => {
-                            if (data.authorizationLevel > 1 && data.authorizationLevel < 3) {
+                            console.log("44444",data)
+                            if (data.authorizationLevel >= 1 && data.authorizationLevel <= 3) {
+                                console.log("44444",email)
                                 User.destroy({  where: { email: email  },  truncate : false })
                                     .then(() => {
-                                        res.send(`El usuario con la email ${email} ha sido eliminado`)
+                                        res.send({ 
+                                            msg: `deleted`})
                                     })
                                     .catch((error) => {
-                                        res.send(`Ha ocurrido el siguiente error ${error}`);
+                                        console.log("4444444444")
+                                        res.send({ 
+                                            msg: `DB error`})
                                     });
                             } else {
-                                res.send("Sólo puedes eliminar un User de nivel 1 al 3")
+                                res.send({  msg:"you only can delete 1 to 3 level user"})
                             }
-                        }).catch(() => {
-                            res.send(`Este usuario que quieres eliminar no existe`)
+                        }).catch(error => {
+                            res.send({msg:"User does not exists"})
                         });
                 } else {
-                    res.send("No deberías de estar aquí")
+                    res.send({msg:"No aqui"})
                     //nodemailer
                 }
             }).catch(error => {
-                res.send(`Ha ocurrido el siguiente error: ${error}`)
+                console.log("555555555")
+                res.send({ 
+                    msg: `DB error`})
             });
     } catch (error) {
-        res.send(error)
+        console.log("66666666")
+        res.send({ 
+            msg: `DB error`})
     };
 }
 

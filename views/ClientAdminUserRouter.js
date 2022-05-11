@@ -20,7 +20,7 @@ router.put('/client/update', auth, isClientAdmin, ClientAdminUsersController.cli
 //http://localhost:5000/users/email/:email
 
 //delete user by email clientAdmin
-router.delete('/client/delete', auth, isClientAdmin, ClientAdminUsersController.clientAdminDeleteUser);
+router.post('/client/delete',  auth, isClientAdmin, ClientAdminUsersController.clientAdminDeleteUser);
 //http://localhost:5000/users/:email
 
 module.exports = router;

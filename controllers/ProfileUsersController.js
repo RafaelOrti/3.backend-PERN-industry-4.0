@@ -51,7 +51,7 @@ ProfileUsersController.updateProfile = (req, res) => {
         email,
         password
     } = req.body;
-    console.log(data);
+    //console.log(data);
 
     if (/^([a-zA-Z0-9@*#.,]{8,15})$/.test(req.body.password) !== true) {
         return res.send({
@@ -62,7 +62,7 @@ ProfileUsersController.updateProfile = (req, res) => {
         try {
             const token = req.headers.authorization.split(" ")[1];
             const payload = jwt.verify(token, authConfig.secret);
-            console.log(payload.user.email);
+            //console.log(payload.user.email);
             User.update(data, {
                     where: {
                         email: payload.user.email
@@ -85,9 +85,8 @@ ProfileUsersController.updateProfile = (req, res) => {
                             }, authConfig.secret, {
                                 expiresIn: authConfig.expires
                             });
-                            console.log("token", User);
-                            console.log(
-                                token);
+                            //console.log("token", User);
+                            //console.log(                                token);
                             res.send({
                                 msg: "updated",
                                 token: token,
@@ -102,7 +101,7 @@ ProfileUsersController.updateProfile = (req, res) => {
                 })
 
         } catch (error) {
-            console.error(error);
+            //console.error(error);
             res.send({
                 msg: `User does not exist`
             })
