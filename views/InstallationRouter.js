@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const InstallationController = require('../controllers/InstallationController');
+const InstallationController = require('../0.controllers/InstallationController');
 
 
 //CLIENT ADMIN PROFILE VIEW

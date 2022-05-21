@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require("../middlewares/auth");
 const isClientAdmin = require("../middlewares/isClientAdmin");
-const ClientAdminUsersController = require('../controllers/ClientAdminUsersController');
+const ClientAdminUsersController = require('../controllers/0.ClientAdminUsersController');
 
 
 //CLIENT ADMIN PROFILE VIEW

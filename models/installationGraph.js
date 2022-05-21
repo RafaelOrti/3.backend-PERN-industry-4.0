@@ -14,10 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   InstallationGraph.init({
+    onOff: DataTypes.BOOLEAN,
+    mode: DataTypes.BOOLEAN,
+    door: DataTypes.BOOLEAN,
     temperature: DataTypes.FLOAT,
     H2O: DataTypes.INTEGER,
-    co2: DataTypes.INTEGER,
-    c2h4: DataTypes.FLOAT
+    CO2: DataTypes.INTEGER,
+    C2H4: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'InstallationGraph',
