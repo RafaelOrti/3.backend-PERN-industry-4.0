@@ -8,9 +8,9 @@ const InstallationModbusTCPController = require('../controllers/InstallationModb
 //CLIENT ADMIN PROFILE VIEW
 
 
-// //read users userInstallation
-// router.post('/communication',  InstallationModbusTCPController.communication);
-// //http://localhost:5000/installation/userInstallation
+//read users userInstallation
+router.get('/communication',  InstallationModbusTCPController.communication);
+//http://localhost:5000/installation/userInstallation
 
 // //read users userInstallation
 // router.post('/systemOnOff',  InstallationModbusTCPController.systemOnOff);

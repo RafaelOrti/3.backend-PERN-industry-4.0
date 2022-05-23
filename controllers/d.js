@@ -101,7 +101,7 @@ InstallationModbusTCPController.writeBitHoldingRegisters = (req, res) => {
       })
     } else {
       client.writeHoldingRegisters(req.body.address, [myData | (1 << req.body.bit)]).then(function (resp) {
-        console.log(resp)
+        console.log(resp)//para setear
       }).catch(function (err) {
         console.log(err)
       })
