@@ -9,7 +9,7 @@ const InstallationModbusTCPController = require('../controllers/InstallationModb
 
 
 //read users userInstallation
-router.post('/homeUserInstallation',  InstallationModbusTCPController.userInstallation);
+router.post('/communication',  InstallationModbusTCPController.communication);
 //http://localhost:5000/installation/userInstallation
 
 //read users userInstallation
@@ -29,12 +29,6 @@ router.post('/writeHoldingRegisters',  InstallationModbusTCPController.writeHold
 //http://localhost:5000/installation/userInstallation
 
 
-router.get('/homeValueReading',  InstallationModbusTCPController.homeValueReading);
-//http://localhost:5000/installation/userInstallation
-
-//read users userInstallation
-router.get('/homeAlarmsReading',  InstallationModbusTCPController.homeAlarmsReading);
-//http://localhost:5000/installation/userInstallation
 
 
 
