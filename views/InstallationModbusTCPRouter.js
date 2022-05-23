@@ -13,20 +13,20 @@ router.post('/homeUserInstallation',  InstallationModbusTCPController.userInstal
 //http://localhost:5000/installation/userInstallation
 
 //read users userInstallation
-router.post('/homeOn',  InstallationModbusTCPController.homeOn);
+router.post('/systemOnOff',  InstallationModbusTCPController.systemOnOff);
 //http://localhost:5000/installation/userInstallation
-
-// //read users userInstallation
-// router.post('/homeOff',  InstallationModbusTCPController.homeOff);
-// //http://localhost:5000/installation/userInstallation
 
 //read users userInstallation
-router.post('/homePreservation',  InstallationModbusTCPController.homePreservation);
+router.post('/writeBitHoldingRegisters',  InstallationModbusTCPController.writeBitHoldingRegisters);
 //http://localhost:5000/installation/userInstallation
 
-// //read users userInstallation
-// router.post('/homeDegreening',  InstallationModbusTCPController.homeDegreening);
-// //http://localhost:5000/installation/userInstallation
+//read users userInstallation
+router.post('/readHoldingRegisters',  InstallationModbusTCPController.readHoldingRegisters);
+//http://localhost:5000/installation/userInstallation
+
+//read users userInstallation
+router.post('/writeHoldingRegisters',  InstallationModbusTCPController.writeHoldingRegisters);
+//http://localhost:5000/installation/userInstallation
 
 
 router.get('/homeValueReading',  InstallationModbusTCPController.homeValueReading);
