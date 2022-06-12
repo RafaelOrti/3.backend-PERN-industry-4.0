@@ -11,9 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // this.belongsTo(models.Installation, {
+      //   foreignKey: 'installationId'
+      // });
     }
   }
   InstallationGraph.init({
+    // installationId: DataTypes.INTEGER,
     onOff: DataTypes.BOOLEAN,
     mode: DataTypes.BOOLEAN,
     door: DataTypes.BOOLEAN,

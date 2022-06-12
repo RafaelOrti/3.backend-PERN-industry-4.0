@@ -8,6 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      // installationId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      //   references: {
+      //     model: 'Installations',
+      //     key: 'id'
+      //   },
+      //   onUpdate: 'CASCADE',
+      //   onDelete: 'CASCADE',
+      //   defaultValue: 0
+      // },
       hTempAlarm: {
         type: Sequelize.BOOLEAN
       },
@@ -26,13 +37,21 @@ module.exports = {
       lC2OAlarm: {
         type: Sequelize.BOOLEAN
       },
+      hC2H4Alarm: {
+        type: Sequelize.BOOLEAN
+      },
+      lC2H4Alarm: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       }
     });
   },

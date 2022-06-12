@@ -11,10 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // this.hasMany(models.Action, {
+      //   foreignKey: 'installationId'
+      // });
+      // this.hasMany(models.InstallationAlarms, {
+      //   foreignKey: 'installationId'
+      // });
+      // this.hasMany(models.InstallationGraph, {
+      //   foreignKey: 'installationId'
+      // });
+      // this.hasMany(models.RealTimeInstallation, {
+      //   foreignKey: 'installationId'
+      // });
     }
   }
   Installation.init({
-    installationIdentifier: DataTypes.STRING,
+    installationId: DataTypes.STRING,
     installationType: DataTypes.STRING
   }, {
     sequelize,

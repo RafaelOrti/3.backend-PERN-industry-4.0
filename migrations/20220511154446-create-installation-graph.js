@@ -8,21 +8,42 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      // installationId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      //   references: {
+      //     model: 'Installations',
+      //     key: 'id'
+      //   },
+      //   onUpdate: 'CASCADE',
+      //   onDelete: 'CASCADE',
+      //   defaultValue: 0
+      // },
+      onOff: {
+        type: Sequelize.BOOLEAN
+      },
+      mode: {
+        type: Sequelize.BOOLEAN
+      },
+      door: {
+        type: Sequelize.BOOLEAN
+      },
       temperature: {
         type: Sequelize.FLOAT
       },
-      h20: {
+      H2O: {
         type: Sequelize.INTEGER
       },
-      co2: {
+      CO2: {
         type: Sequelize.INTEGER
       },
-      c2h4: {
+      C2H4: {
         type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
+
       },
       updatedAt: {
         allowNull: false,
