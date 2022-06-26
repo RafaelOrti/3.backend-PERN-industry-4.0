@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const InstallationModbusTCPController = require('../controllers/InstallationModbusTCPController')
+const InstallationModbusTCPController = require('../controllers/InstallationMqttController')
 
 // CLIENT ADMIN PROFILE VIEW
 

@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class InstallationAlarms extends Model {
     /**
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate (models) {
       // define association here
       // this.belongsTo(models.Installation, {
       //   foreignKey: 'installationId'
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     lC2H4Alarm: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'InstallationAlarms',
-  });
-  return InstallationAlarms;
-};
+    modelName: 'InstallationAlarms'
+  })
+  return InstallationAlarms
+}

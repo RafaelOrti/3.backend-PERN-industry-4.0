@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class InstallationGraph extends Model {
     /**
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate (models) {
       // define association here
       // this.belongsTo(models.Installation, {
       //   foreignKey: 'installationId'
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     C2H4: DataTypes.FLOAT
   }, {
     sequelize,
-    modelName: 'InstallationGraph',
-  });
-  return InstallationGraph;
-};
+    modelName: 'InstallationGraph'
+  })
+  return InstallationGraph
+}

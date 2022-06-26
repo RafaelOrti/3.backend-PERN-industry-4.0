@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('InstallationAlarms', {
       id: {
         allowNull: false,
@@ -53,9 +53,9 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
       }
-    });
+    })
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('InstallationAlarms');
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('InstallationAlarms')
   }
-};
+}
