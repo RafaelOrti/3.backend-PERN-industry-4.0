@@ -82,7 +82,6 @@ AdminUsersController.adminCreateUser = (req, res) => {
             }
           })
             .then(repeatedData => {
-              console.log(repeatedData)
               if (repeatedData == null) {
                 User.create({
                   name: data.name,
@@ -136,7 +135,6 @@ AdminUsersController.adminUpdateUser = (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
-    console.log(payload.user.email)
     User.findOne({
       where: {
         email: payload.user.email

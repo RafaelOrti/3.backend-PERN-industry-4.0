@@ -31,8 +31,6 @@ const dataBaseRandom = () => {
   meassurements[13] = Math.round(Math.random())
   meassurements[14] = Math.round(Math.random())
 
-  console.log('meassurements', meassurements)
-
   data = {
     onOff: meassurements[4],
     mode: meassurements[5],

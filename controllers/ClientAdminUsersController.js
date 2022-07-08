@@ -11,9 +11,7 @@ const ClientAdminUsersController = {}
 ClientAdminUsersController.clientAdminReadUsers = (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1]
-    console.log(token)
     const payload = jwt.verify(token, authConfig.secret)
-    console.log('4444', payload)
     User.findOne({
       where: {
         email: payload.user.email
@@ -71,8 +69,6 @@ ClientAdminUsersController.clientAdminCreateUser = (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
-    console.log('repeatedData', payload)
-    console.log('repeatedData', data)
     User.findOne({
       where: {
         email: payload.user.email
@@ -155,7 +151,6 @@ ClientAdminUsersController.clientAdminUpdateUser = (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
-    console.log(payload.user.email)
     User.findOne({
       where: {
         email: payload.user.email
@@ -201,12 +196,10 @@ ClientAdminUsersController.clientAdminUpdateUser = (req, res) => {
 // http://localhost:5000/users/:email
 ClientAdminUsersController.clientAdminDeleteUser = (req, res) => {
   // read data from request
-  console.log('bolsillo', req)
   const email = req.body.email
   try {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
-    console.log('bolsillo', payload.user.email)
     User.findOne({
       where: {
         email: payload.user.email
@@ -221,9 +214,7 @@ ClientAdminUsersController.clientAdminDeleteUser = (req, res) => {
             }
           })
             .then(data => {
-              console.log('44444', data)
               if (data.authorizationLevel >= 1 && data.authorizationLevel <= 3) {
-                console.log('44444', email)
                 User.destroy({
                   where: {
                     email
@@ -262,7 +253,6 @@ ClientAdminUsersController.clientAdminDeleteUser = (req, res) => {
         })
       })
   } catch (error) {
-    console.log('66666666')
     res.send({
       msg: 'DB error'
     })
