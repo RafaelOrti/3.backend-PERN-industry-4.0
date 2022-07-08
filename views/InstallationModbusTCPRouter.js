@@ -11,7 +11,7 @@ router.get('/communication', InstallationModbusTCPController.communication)
 
 router.post('/graphData', InstallationModbusTCPController.graphData)
 
-router.post('/alarmsData', InstallationModbusTCPController.alarmsData)
+// router.post('/alarmsData', InstallationModbusTCPController.alarmsData)
 
 // //read users userInstallation
 // router.post('/systemOnOff',  InstallationModbusTCPController.systemOnOff);
