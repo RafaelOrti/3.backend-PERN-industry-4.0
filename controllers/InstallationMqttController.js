@@ -8,8 +8,6 @@ const InstallationModbusTCPController = {}
 
 // modbus tcp
 
-console.log('hola')
-
 const net = require('net')
 // const modbus = require('jsmodbus')
 const socket = new net.Socket()

@@ -73,8 +73,6 @@ ProfileUsersController.updateProfile = (req, res) => {
               }, authConfig.secret, {
                 expiresIn: authConfig.expires
               })
-              // console.log("token", User);
-              // console.log(                                token);
               res.send({
                 msg: 'updated',
                 token,
