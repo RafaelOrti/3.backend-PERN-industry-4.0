@@ -1,10 +1,7 @@
-// const authConfig = require('../config/auth')
-// const { RealTimeInstallation } = require('../models/index')
-// const axios = require('axios')
 const InstallationModbusTCPController = {}
 const { InstallationGraph, InstallationAlarms } = require('../models/index')
 const { Op } = require('sequelize')
-// const { Sequelize, Model, DataTypes } = require('sequelize')
+
 let data
 
 const dataBaseRandom = () => {
@@ -132,46 +129,5 @@ InstallationModbusTCPController.alarmsData = async (req, res) => {
     })
   }
 }
-
-// var query = {
-//     Date: {
-//         $gte: new Date(req.body.startDate).toISOString(),
-//         $lte: new Date(req.body.endDate).toISOString()
-//     }
-// }
-
-// InstallationGraph.find(query, function (err, data) {
-//     if (err) { return res.status(300).json("Error") }
-//     else {
-//         return res.status(200).json({ data: data })
-//     }
-// })
-
-// const query = {
-//   startDate,
-//   endDate,
-// }
-// console.log(startDate)
-// console.log(endDate)
-
-// InstallationGraph.findAll({
-//   where: {
-//     [Op.and]: [{
-//         createdAt: {
-//           [Op.between]: [startDate, endDate]
-//         }
-//       },
-//       Sequelize.where(Sequelize.cast(Sequelize.col('createdAt'), 'time'), '>=', '12:00'),
-//       Sequelize.where(Sequelize.cast(Sequelize.col('createdAt'), 'time'), '<=', '15:00')
-//     ]
-//   }
-// }).then(data => {
-//   res.send(data);
-//   console.log(data);
-// }).catch(error => {
-//   res.send({
-//     msg: `DB error`
-//   });
-// })
 
 module.exports = InstallationModbusTCPController
