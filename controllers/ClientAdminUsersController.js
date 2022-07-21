@@ -54,7 +54,8 @@ ClientAdminUsersController.clientAdminCreateUser = (req, res) => {
   data.name = req.body.name
   data.email = req.body.email
   data.password = req.body.password
-  if (data.authorizationLevel < 1 && data.authorizationLevel > 3) {
+  data.authorizationLevel = req.body.authorizationLevel
+  if (data.authorizationLevel < 1 || data.authorizationLevel > 3) {
     return res.send({
       msg: 'Only users with 1 to 3 allowed'
     })
@@ -75,7 +76,7 @@ ClientAdminUsersController.clientAdminCreateUser = (req, res) => {
       }
     })
       .then(found => {
-        if (found.authorizationLevel >= 3) {
+        if (found.authorizationLevel === 3) {
           // controller function
           User.findOne({
             where: {
@@ -135,8 +136,8 @@ ClientAdminUsersController.clientAdminUpdateUser = (req, res) => {
   data.name = req.body.name
   data.email = req.body.email
   data.password = req.body.password
-
-  if (data.authorizationLevel < 1 && data.authorizationLevel > 3) {
+  data.authorizationLevel = req.body.authorizationLevel
+  if (data.authorizationLevel < 1 || data.authorizationLevel > 3) {
     return res.send({
       msg: 'you only can update 1 to 3 level user'
     })
@@ -157,14 +158,14 @@ ClientAdminUsersController.clientAdminUpdateUser = (req, res) => {
       }
     })
       .then(found => {
-        if (found.authorizationLevel >= 3) {
+        if (found.authorizationLevel === 3) {
           // controller function
           User.update(data, {
             where: {
               email: data.email
             }
           })
-            .then(updated => {
+            .then(() => {
               res.send({
                 msg: 'updated'
               })
@@ -197,6 +198,7 @@ ClientAdminUsersController.clientAdminUpdateUser = (req, res) => {
 ClientAdminUsersController.clientAdminDeleteUser = (req, res) => {
   // read data from request
   const email = req.body.email
+  console.log(email)
   try {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
@@ -206,7 +208,7 @@ ClientAdminUsersController.clientAdminDeleteUser = (req, res) => {
       }
     })
       .then(found => {
-        if (found.authorizationLevel >= 3) {
+        if (found.authorizationLevel === 3) {
           // controller function
           User.findOne({
             where: {
