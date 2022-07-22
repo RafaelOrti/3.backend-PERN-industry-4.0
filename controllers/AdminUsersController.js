@@ -2,7 +2,7 @@ const authConfig = require('../config/auth')
 const {
   User
 } = require('../models/index')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt-nodejs')
 const jwt = require('jsonwebtoken')
 const {
   Op

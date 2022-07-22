@@ -3,7 +3,7 @@ const {
   User
 } = require('../models/index')
 // const { Op } = require('sequelize')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt-nodejs')
 const jwt = require('jsonwebtoken')
 const ProfileUsersController = {}
 
