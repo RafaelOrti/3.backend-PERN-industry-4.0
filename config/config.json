@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "1234",
-    "database": "database_industria_4.0",
-    "host": "127.0.0.1",
+    "username": "bdebd5976908d9",
+    "password": "0d65e3f2",
+    "database": "heroku_81e464eaa0b237a",
+    "host": "eu-cdbr-west-03.cleardb.net",
     "dialect": "mysql" 
   },
   "test": {
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "bdebd5976908d9",
+    "password": "0d65e3f2",
+    "database": "heroku_81e464eaa0b237a",
+    "host": "eu-cdbr-west-03.cleardb.net",
     "dialect": "mysql" 
   }
 }

@@ -18,20 +18,20 @@ AdminUsersController.adminReadUsers = (req, res) => {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
     User.findOne({
-        where: {
-          email: payload.user.email
-        }
-      })
+      where: {
+        email: payload.user.email
+      }
+    })
       .then(found => {
         if (found.authorizationLevel === 5) {
           // controller function
           User.findAll({
-              where: {
-                authorizationLevel: {
-                  [Op.or]: [1, 2, 3, 4, 5]
-                }
+            where: {
+              authorizationLevel: {
+                [Op.or]: [1, 2, 3, 4, 5]
               }
-            })
+            }
+          })
             .then(data => {
               res.send(data)
             }).catch(error => {
@@ -74,18 +74,18 @@ AdminUsersController.adminCreateUser = (req, res) => {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
     User.findOne({
-        where: {
-          email: payload.user.email
-        }
-      })
+      where: {
+        email: payload.user.email
+      }
+    })
       .then(found => {
         if (found.authorizationLevel === 5) {
           // controller function
           User.findOne({
-              where: {
-                email: data.email
-              }
-            })
+            where: {
+              email: data.email
+            }
+          })
             .then(repeatedData => {
               if (repeatedData == null) {
                 User.create({
@@ -154,18 +154,18 @@ AdminUsersController.adminUpdateUser = (req, res) => {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
     User.findOne({
-        where: {
-          email: payload.user.email
-        }
-      })
+      where: {
+        email: payload.user.email
+      }
+    })
       .then(found => {
         if (found.authorizationLevel === 5) {
           // controller function
           User.update(data, {
-              where: {
-                email: data.email
-              }
-            })
+            where: {
+              email: data.email
+            }
+          })
             .then(updated => {
               res.send({
                 msg: 'updated'
@@ -201,26 +201,26 @@ AdminUsersController.adminDeleteUser = (req, res) => {
     const token = req.headers.authorization.split(' ')[1]
     const payload = jwt.verify(token, authConfig.secret)
     User.findOne({
-        where: {
-          email: payload.user.email
-        }
-      })
+      where: {
+        email: payload.user.email
+      }
+    })
       .then(found => {
         if (found.authorizationLevel === 5) {
           // controller function
           User.findOne({
-              where: {
-                email
-              }
-            })
+            where: {
+              email
+            }
+          })
             .then(data => {
               if (data.authorizationLevel >= 1 && data.authorizationLevel <= 5) {
                 User.destroy({
-                    where: {
-                      email
-                    },
-                    truncate: false
-                  })
+                  where: {
+                    email
+                  },
+                  truncate: false
+                })
                   .then(() => {
                     res.send({
                       msg: 'deleted'
