@@ -47,7 +47,6 @@
     "sequelize": "6.21.3",
     "sequelize-cli": "6.4.1",
     "serialport": "10.4.0",
-    "sqlite3": "5.0.8",
     "winston": "3.7.2"
   },
   "devDependencies": {
