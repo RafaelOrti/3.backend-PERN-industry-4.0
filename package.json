@@ -7,9 +7,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "standard",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "sequelize db:create",
-    "migrate": "sequelize db:migrate"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -40,15 +38,15 @@
     "mysql2": "2.3.3",
     "node-fetch": "3.2.3",
     "nodemailer": "6.7.3",
-    "nodemon": "2.0.19",
     "oauth": "0.9.15",
     "oauth2-server": "3.1.1",
-    "sequelize": "^6.21.3",
-    "sequelize-cli": "^6.4.1",
+    "sequelize": "6.21.3",
     "serialport": "10.4.0",
     "sql": "0.78.0"
   },
   "devDependencies": {
+    "nodemon": "2.0.19",
+    "sequelize-cli": "6.4.1",
     "standard": "17.0.0"
   },
   "eslintConfig": {
