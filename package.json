@@ -43,11 +43,10 @@
     "nodemon": "2.0.19",
     "oauth": "0.9.15",
     "oauth2-server": "3.1.1",
-    "sequelize": "6.21.3",
+    "sequelize": "^6.21.3",
     "sequelize-cli": "^6.4.1",
     "serialport": "10.4.0",
-    "sql": "0.78.0",
-    "sqlite3": "^5.0.10"
+    "sql": "0.78.0"
   },
   "devDependencies": {
     "standard": "17.0.0"
